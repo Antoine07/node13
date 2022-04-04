@@ -1,74 +1,115 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Redux basic example</title>
-    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
 
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<head>
+  <title>Redux basic example</title>
+  <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
 
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/babel">
-      // ----- PARTIE REDUX ----- 
-      // SOURCE DE VERITE 
-      const stateInit = {
-        messages: [], // ajout des messages
-        message: "", // le formulaire contrôler le champ input formulaire
-      };
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    // ----- PARTIE REDUX ----- 
+    // SOURCE DE VERITE 
+    const stateInit = {
+      messages: [], // ajout des messages
+      message: "", // le formulaire contrôler le champ input formulaire
+    };
 
 
-      const messageReducer = (state = stateInit, action) => {
-        switch (action.type) {
+    const messageReducer = (state = stateInit, action) => {
+      switch (action.type) {
 
-          // actions
+        case 'SET_MESSAGE':
+          return {
+            ...state,
+            message: action.message
+          }
 
-          default:
-            return state;
-        }
-      };
-      
-      // création du store
-      const store = Redux.createStore(messageReducer);
+        case 'PUT_MESSAGE':
+          return {
+            ...state,
+            messages: [...state.messages, state.message], // copy 
+            message: ''
+          }
 
-      const Form = (props) => {
-      
+        default:
+          return state;
+      }
+    };
 
-        return (
-          <form onSubmit={handleSubmit}>
-            
-          </form>
-        );
-      };
+    // création du store
+    const store = Redux.createStore(messageReducer);
 
-      const App = () => {
-        const { messages, message } = store.getState();
+    function Form(props) {
 
-        const reset = () => {
-          store.dispatch({type : RESET }) // TODO dans le reducer 
-        }
+      const { message } = store.getState();
 
-        return (
-            <Form />
-        );
-      };
+      console.log(message)
 
-      // souscrire au mise à jour du state effectuée par les dispatch dans Redux
-      store.subscribe(() => {
-        render();
-      });
 
-      // render est re-fait lorsqu'un dispatch a renvoyé une copie du state
-      const render = () =>
-        ReactDOM.render(
-            <App  />
-         ,
-          document.getElementById("root")
-        );
+      function handleSubmit(e) {
+        e.preventDefault();
 
-        render();
-    </script>
-  </body>
+        store.dispatch({ type: 'PUT_MESSAGE' })
+      }
+
+      function handleChange(e) {
+        const { name, value } = e.target;
+
+        console.log(name, value);
+
+        store.dispatch({ type: 'SET_MESSAGE', message: value })
+      }
+
+      return (
+        <form onSubmit={handleSubmit}>
+          <p>Name bind :{message} </p>
+          <p><input type="text" name="message" value={message} onChange={handleChange} /></p>
+          <p><button > Ok </button></p>
+        </form>
+      );
+    };
+
+    const App = () => {
+      const { messages } = store.getState();
+
+      const reset = () => {
+        store.dispatch({ type: RESET }) // TODO dans le reducer 
+      }
+
+      return (
+        <React.Fragment>
+          <Form />
+          {messages.length > 0 && (
+            <ul>
+              {messages.map((m, i) => <li key={i}>{m}</li>)}
+            </ul>
+          )}
+        </React.Fragment>
+      );
+    };
+
+    // souscrire au mise à jour du state effectuée par les dispatch dans Redux
+    store.subscribe(() => {
+      render();
+    });
+
+    // render est re-fait lorsqu'un dispatch a renvoyé une copie du state
+    const render = () =>
+      ReactDOM.render(
+        <App />
+        ,
+        document.getElementById("root")
+      );
+
+    render();
+  </script>
+</body>
+
 </html>
