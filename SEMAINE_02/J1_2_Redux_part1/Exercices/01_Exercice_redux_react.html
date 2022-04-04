@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redux basic example</title>
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // ----- PARTIE REDUX ----- 
+      // SOURCE DE VERITE 
+      const stateInit = {
+        messages: [], // ajout des messages
+        message: "", // le formulaire contrôler le champ input formulaire
+      };
+
+
+      const messageReducer = (state = stateInit, action) => {
+        switch (action.type) {
+
+          // actions
+
+          default:
+            return state;
+        }
+      };
+      
+      // création du store
+      const store = Redux.createStore(messageReducer);
+
+      const Form = (props) => {
+      
+
+        return (
+          <form onSubmit={handleSubmit}>
+            
+          </form>
+        );
+      };
+
+      const App = () => {
+        const { messages, message } = store.getState();
+
+        const reset = () => {
+          store.dispatch({type : RESET }) // TODO dans le reducer 
+        }
+
+        return (
+            <Form />
+        );
+      };
+
+      // souscrire au mise à jour du state effectuée par les dispatch dans Redux
+      store.subscribe(() => {
+        render();
+      });
+
+      // render est re-fait lorsqu'un dispatch a renvoyé une copie du state
+      const render = () =>
+        ReactDOM.render(
+            <App  />
+         ,
+          document.getElementById("root")
+        );
+
+        render();
+    </script>
+  </body>
+</html>
