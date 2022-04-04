@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- babel => compilation du JSX -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- JS, Popper.js, and jQuery -->
+    <style>
+        .special {
+            margin-top: 20%;
+            text-align: center;
+            height: 50px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const Number = (props) => {
+            console.log(props.num);
+
+            // props.num = 10;
+            return ( <p>NUMBER : {props.num}</p> )
+        } ;
+
+        const App = (props) => {
+            // un state une variable qui peut être mutable à l'aide de sa fonction d'état
+            // On un state count et une fonction d'état qui est setCount
+            /*
+                setCount modifie la valeur du count ET si celle-ci a changé il re-render
+            */
+            const [count, setCount] = React.useState(0);
+
+            console.log(count);
+            //lecture possible
+            console.log(props.title);
+            // IMPOSSIBLE CAR LECTURE SEULE
+            // props.title = "Vue.JS";
+
+            return (
+                <div>
+                    <p>Hello World {count}</p>
+                    <button onClick={() => setCount(count + 1)} >
+                        click me
+                    </button>
+                    <Number num={count} />
+                </div>
+            );
+        }
+
+        ReactDOM.render(
+            <App title="React" />,
+            document.getElementById('root')
+        );
+
+    </script>
+</body>
+
+</html>
