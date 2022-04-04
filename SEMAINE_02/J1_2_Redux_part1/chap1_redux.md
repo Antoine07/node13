@@ -86,6 +86,11 @@ render();
   Hello World 2
  
  ```
+ 
+ En option vous pouvez ajouter maintenant un bouton pour supprimer les messages.
+ 
+ 
+ ---- 
 
 
 ## Méthodes react-redux
