@@ -2,7 +2,7 @@
 
 Vous allez créer une petite application qui permet de saisir un montant donné et qui fournit la monnaie en token(s) que l'on peut rendre par rapport à ce montant.
 
-Vous vous aiderez de la documentation officielle pour réaliser ce TP : [React Native](https://facebook.github.io/react-native/docs/getting-started)
+Vous vous aiderez de la documentation officielle pour réaliser ce TP 
 
 Voici les dénominations, c'est-à-dire les tokens que l'on pourra rendre en fonction d'un montant donné :
 
