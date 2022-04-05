@@ -1,4 +1,10 @@
-import { ADD_DRAGON, DELETE_DRAGON, SET_DRAGON, SHUFFLE } from "../constants/actions";
+import {
+  ADD_DRAGON,
+  CAPITALIZE,
+  DELETE_DRAGON,
+  SET_DRAGON,
+  SHUFFLE,
+} from "../constants/actions";
 
 // initialisation des states : SOURCE DE VERITE
 const stateInit = {
@@ -12,6 +18,14 @@ const stateInit = {
 const reducer = (state = stateInit, action = {}) => {
   let dragons, dragon;
   switch (action.type) {
+    case CAPITALIZE:
+      dragons = [...state.dragons];
+
+      return {
+        ...state,
+        dragons: dragons.map((d) => d.toUpperCase()),
+      };
+
     case SET_DRAGON:
       return {
         ...state,
@@ -21,7 +35,7 @@ const reducer = (state = stateInit, action = {}) => {
     case SHUFFLE:
       dragons = [...state.dragons];
 
-      dragons.sort( _ => Math.random() - 0.5 )
+      dragons.sort((_) => Math.random() - 0.5);
 
       return {
         ...state,

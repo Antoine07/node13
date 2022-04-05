@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { deleteDragon, shuffle } from "./actions/actions-types";
+import { capitalize, deleteDragon, shuffle } from "./actions/actions-types";
 
 import Form from "./components/Form";
 
@@ -16,6 +16,9 @@ function App() {
     dispatch(shuffle());
   }
 
+  function handleCaptialize() {
+    dispatch(capitalize());
+  }
   return (
     <div className="container">
       <div className="row">
@@ -28,6 +31,15 @@ function App() {
             onClick={handleShuffle}
           >
             shuffle
+          </button>
+          </p>
+          <p>
+          <button
+            type="button"
+            className="btn btn-warning"
+            onClick={handleCaptialize}
+          >
+            Capitalize
           </button>
           </p>
           {dragons.length > 0 &&
