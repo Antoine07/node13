@@ -1,6 +1,6 @@
 import {
   ADD_DRAGON,
-  CAPITALIZE,
+  UPPER_LOWER,
   DELETE_DRAGON,
   SET_DRAGON,
   SHUFFLE,
@@ -13,17 +13,19 @@ const stateInit = {
   age: "",
   count: 3,
   message: "",
+  toggle : true
 };
 
 const reducer = (state = stateInit, action = {}) => {
   let dragons, dragon;
   switch (action.type) {
-    case CAPITALIZE:
+    case UPPER_LOWER:
       dragons = [...state.dragons];
 
       return {
         ...state,
-        dragons: dragons.map((d) => d.toUpperCase()),
+        dragons: dragons.map((d) => state.toggle ?  d.toUpperCase() : d.toLowerCase() ),
+        toggle : !state.toggle
       };
 
     case SET_DRAGON:

@@ -1,5 +1,4 @@
-import { DELETE_DRAGON, SHUFFLE, CAPITALIZE } from "../constants/actions";
-
+import { DELETE_DRAGON, SHUFFLE, UPPER_LOWER } from "../constants/actions";
 
 export const deleteDragon = payload => {
     return {
@@ -7,15 +6,14 @@ export const deleteDragon = payload => {
     }
 };
 
-
 export const shuffle = () => {
     return {
         type: SHUFFLE
     }
 };
 
-export const capitalize = () => {
+export const toggleUpperLower = () => {
     return {
-        type: CAPITALIZE
+        type: UPPER_LOWER
     }
 };

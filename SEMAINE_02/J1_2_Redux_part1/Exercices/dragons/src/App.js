@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { capitalize, deleteDragon, shuffle } from "./actions/actions-types";
+import { toggleUpperLower, deleteDragon, shuffle } from "./actions/actions-types";
 
 import Form from "./components/Form";
 
 function App() {
-  const { dragons, count } = useSelector((state) => state);
+  const { dragons, count, toggle } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   function handleDelte(d) {
@@ -16,8 +16,8 @@ function App() {
     dispatch(shuffle());
   }
 
-  function handleCaptialize() {
-    dispatch(capitalize());
+  function handleToggle() {
+    dispatch(toggleUpperLower());
   }
   return (
     <div className="container">
@@ -37,9 +37,9 @@ function App() {
           <button
             type="button"
             className="btn btn-warning"
-            onClick={handleCaptialize}
+            onClick={handleToggle}
           >
-            Capitalize
+            {toggle ? 'Upper' : 'Lower'}
           </button>
           </p>
           {dragons.length > 0 &&
