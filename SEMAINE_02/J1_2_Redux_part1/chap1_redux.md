@@ -200,7 +200,7 @@ reducers/
 constants/
     actions.js.  <--- les constantes export const ADD_DRAGON = "ADD_DRAGON" ; ...
 
-actions/
+actions-types/
     actions-types.js. <--- factoriser les actions du dispatcher dans une fonction, par add_dragon pour les écrire dans le code : dispatch( add_dragon( dragon ) )
 
 ```
@@ -234,6 +234,10 @@ const { name, force } = action.payload;
 ```
 
 Utilisez ces constantes dans l'exercice.
+
+Questions supplémantaires 
+
+Ajoutez un bouton qui met en majuscule tous les noms des dragons.
 
 ### Reducer
 
