@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-// import Nav from "../Styles/Nav"; // TODO faire un styled pour gérer la navigation
+import Nav from "../Styles/Nav"; // TODO faire un styled pour gérer la navigation
 
 const Navigate = (props) => {
 
@@ -7,12 +7,12 @@ const Navigate = (props) => {
     return {
       display: "block",
       margin: "1rem 0",
-      color: isActive ? "oragne" : "",
+      color: isActive ? "orange" : "",
     };
   };
 
   return (
-    <nav>
+    <Nav>
       <ul>
         <li>
           <NavLink style={checkIsactive} to="/">HOME</NavLink>
@@ -21,7 +21,7 @@ const Navigate = (props) => {
           <NavLink style={checkIsactive} to="/denomination">Denomination</NavLink>
         </li>
       </ul>
-    </nav>
+    </Nav>
   );
 };
 
