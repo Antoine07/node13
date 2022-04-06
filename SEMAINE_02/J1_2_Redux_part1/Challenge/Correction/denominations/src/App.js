@@ -1,15 +1,19 @@
-import Button from './Styles/Button';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Denomination from './components/Denomination';
+import Home from './components/Home';
+import Nav from './components/Navigate';
 
 function App() {
 
-  function handleClick(e) {
-    console.log(e);
-  }
 
   return (
-    <div className="App">
-      <Button onClick={handleClick}>Hello</Button>
-    </div>
+    <BrowserRouter>
+    <Nav />
+    <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="denomination" element={<Denomination />} />
+    </Routes>
+</BrowserRouter>
   );
 }
 
