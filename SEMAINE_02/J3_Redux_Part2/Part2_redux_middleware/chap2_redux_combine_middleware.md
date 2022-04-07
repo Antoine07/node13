@@ -109,6 +109,29 @@ myFunc(10)(10)
 
 Refactorez les logs en créant un middleware : middlewareLog. Vous pouvez créer une branch avec Git refactoring (facultatif). Lorsqu'on ajoute ou supprime un dragon et uniquement pour ces actions, notifiez le dans les logs à l'aide de votre middleware.
 
+## 00 Exercice 
+
+Créez un système de log numérique avec Math.random(), au clique. Faites deux reducers et utilisez un middleware pour mettre à jour le compteur.
+
+Indications :
+
+```js
+const customMiddleware = store => next => action {
+    const state = store.getState(); 
+    const returnAction = next(action);
+    
+    return returnAction ;
+}
+```
+
+Configuration de votre createStore :
+
+```js
+import { createStore, applyMiddleware  } from 'redux';
+
+const store = createStore(reducer, applyMiddleware(middlewareCount));
+```
+
 ## Middleware thunk
 
 Les actions sont dispatchées de manière synchrone dans le reducer. Pour pouvoir gérer des actions asynchrones on doit installer le module thunk qui est un middleware. Il permettra de gérer l'asynchrone des actions dans le reducer.
