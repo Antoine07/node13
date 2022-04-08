@@ -15,7 +15,7 @@ src/
     actions-types/
         ...
     middlewares/
-        ...
+        log.js
     reducers/
         yam.js
         history.js
@@ -26,13 +26,13 @@ src/
 App.js
 ```
 
-Le middleware log.js permettra d'enregistrer chaque log du jeu en notant les résultats et la date précise ou le lancer aura été effectué.
+Le middleware log.js permettra d'enregistrer chaque log du jeu, en notant les résultats et la date précise du lancer et ses statistiques.
 
 ## Contexte
 
-Vous créez un bouton qui lance trois dés et compte le nombre de fois que l'on obtient des brelans, brelan = trois dés identiques; à chaque fois que l'on relance l'expérience on ré-initialise le compteur, il faut faire un grande nombre de fois cette expérience pour avoir des statistiques sur la chance d'obtenir un certain type de brelan.
+Vous créez un bouton qui lance trois dés et compte le nombre de fois que l'on obtient des brelans, brelan = trois dés identiques; à chaque fois que l'on relance l'expérience on ré-initialise le compteur, il faut faire un grande nombre de fois cette expérience pour avoir des statistiques sur la chance d'obtenir un certain type de brelan. Vous devez rendre explicite ce fait dans l'application.
 
-L'application possède 2 pages distinctes : la page Home qui permet de lancer l'expérience et une page permettant de consulter les statistiques et une page qui récupère les statistiques.
+L'application possède 2 pages distinctes : la page Home qui permet de lancer l'expérience et une page permettant de consulter les statistiques et une page optionnelle qui récupère les statistiques enregistrées dans un fichier JSON (à la main) sur un dépôt GitHub (raw).
 
 ## Page Home le jeu
 
@@ -53,11 +53,13 @@ Sur cette page vous afficherez l'ensemble des statistiques, ensemble des lancers
 
 Ajoutez également un bouton pour ré-initialiser les statistiques.
 
-## Page d'enregistrement
+N'oubliez pas d'utiliser le middleware log afin d'enregistrer l'ensemble de vos résultats.
 
-Découverte et mise en place d'un middleware pour la gestion de fonction dispatcher de manière asynchrone au reducer.
+## Page d'enregistrement (facultative)
 
-Créez une page sur GitHub permettant de récupérer les statistiques avec axios en utilisant un red
+Découverte et mise en place d'un middleware spécifique pour la gestion de fonctions dispatchées de manière asynchrone dans votre reducer.
+
+Créez une page sur GitHub permettant de récupérer les statistiques avec axios en utilisant un useRef ou directement dans votre reducer, attention si vous utilisez le reducer pour récupérer cette source, vous devez utiliser le middleware thunk, voir les indications ci-dessous.
 
 ### Middleware thunk
 
@@ -85,3 +87,18 @@ export const startCounter = () => {
   };
 }
 ```
+
+Dans la partie bootstrap de React pour configurer thunk et log un autre middleware voyez l'indication suivante :
+
+```js
+import thunk from 'redux-thunk';
+
+import reducer from './reducers/index'; // on récupère dragon & log
+import middlewareLog from './middlewares/log';
+
+const store = createStore(reducer, applyMiddleware(middlewareLog, thunk));
+```
+
+
+
+
